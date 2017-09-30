@@ -61,3 +61,7 @@ $RECYCLE.BIN/
 
 # Windows shortcuts
 *.lnk
+/AdvJava/build/
+/AdvJava/nbproject/private/
+/Assignment2/build/
+/Assignment2/nbproject/private/
