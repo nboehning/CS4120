@@ -119,6 +119,8 @@ public class Exercise19_7 {
         else
             System.out.println("The employee name you entered was not in the employee array.");
         
+        
+        System.out.println("End of Program");
     }
     
     public static <E extends Comparable<E>> int binarySearch(E[] arr, E valToFind) {
