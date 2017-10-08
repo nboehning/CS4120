@@ -11,9 +11,10 @@ import java.util.concurrent.RecursiveTask;
  */
 public class Exercise30_15 {
     public static void main(String[] args) {
-        double[] nums = new double[9000000];
-        for(int i = 0; i < 9000000; i++)
+        double[] nums = new double[7000000];
+        for(int i = 0; i < 7000000; i++) {
             nums[i] = Math.random() * 5000;
+        }
         
         System.out.println("Gets to the parallel sums");
         long startTime = System.currentTimeMillis();
@@ -23,7 +24,20 @@ public class Exercise30_15 {
                 .availableProcessors() + " completed in " + (endTime - startTime) 
                 + " milliseconds"); 
         
+        startTime = System.currentTimeMillis();
+        System.out.print("The sum is " + sequentialSum(nums));
+        endTime = System.currentTimeMillis();
+        System.out.println(" completed in " + (endTime - startTime)
+                + " milliseconds"); 
     }
+    
+    public static double sequentialSum(double[] nums) {
+        double sum = nums[0];
+        for(int i = 1; i < nums.length; i++)
+            sum += nums[i];
+        
+        return sum;
+    }   
     
     public static double parallelSum(double[] list) {
         RecursiveTask<Double> mainTask = new SumTask(list, 0, list.length);
@@ -36,6 +50,7 @@ public class Exercise30_15 {
         private final int THRESHOLD = 500;
         private int low;
         private int high;
+        int count;
         
         SumTask(double[] list, int low, int high) {
             this.list = list;
@@ -49,7 +64,10 @@ public class Exercise30_15 {
                 double sum = 0.0;
                 for(int i = low; i < high; i++) {
                     sum += list[i];
+                    count++;
                 }
+                
+                System.out.println("Number summed in parallel: " + count);
                 return sum;
             }
             else {
