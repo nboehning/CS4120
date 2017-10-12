@@ -1,5 +1,3 @@
-package advjava.competition;
-
 import java.util.Scanner;
 
 /**
@@ -12,7 +10,7 @@ public class ProblemJ {
         Scanner scan = new Scanner(System.in);
         
         int numInputs = scan.nextInt();
-        
+        String[] solutions = new String[numInputs];
         for(int i = 0; i < numInputs; i++) {
             String toDo = scan.next();
             switch(toDo) {
@@ -20,14 +18,20 @@ public class ProblemJ {
                     String toEncrypt = new String(scan.nextLine().substring(1));
                     String encrypted = encrypt(toEncrypt);
                     System.out.println(encrypted);
+                    //solutions[i] = encrypted;
                     break;
                 case "d":
                     String toDecrypt = new String(scan.nextLine().substring(1));
                     String decrypted = decrypt(toDecrypt);
                     System.out.println(decrypted);
+                    //solutions[i] = decrypted;
                     break;
             }
         }
+        
+       // for(int i = 0; i < numInputs; i++) {
+       //     System.out.println(solutions[i]);
+       // }
     }
     
     public static String encrypt(String input) {
@@ -73,8 +77,6 @@ public class ProblemJ {
         int[] newConverter = new int[input.length()];
         boolean isSpace = false;
         int multi = 1;
-        int mod = 1;
-        int j = 0;
         
         for(int i = 0; i < input.length(); i++) {
             switch(input.charAt(i)) {
@@ -87,27 +89,19 @@ public class ProblemJ {
             }
         }
         
-        while(true) {
-            if(converter[0] * mod < 27)
-            {
-                mod++;
-            }
-            else
-                break;
-        }
-        
         newConverter[0] = converter[0];
         for(int i = 1; i < converter.length; i++) {
-            if(i % mod == 0)
+            if(((converter[i] + (27 * multi)) < (converter[i-1] + (27 * multi))) && i > 1) {
                 multi++;
+            }
             if(isSpace) {
                 isSpace = false;
             }
             else if(i < converter.length - 1) {
                 if(converter[i] == converter[i+1]) {
                     //Next one is a space
-                    newConverter[i+1] = converter[i] + (27 * multi) + converter[i-1] - converter[0];
-                    newConverter[i] = converter[i] + (27 * multi) + converter[i-1] - converter[0];
+                    newConverter[i+1] = converter[i] + (27 * multi);
+                    newConverter[i] = converter[i] + (27 * multi);
                     isSpace = true;
                 }
                 else {
@@ -119,6 +113,8 @@ public class ProblemJ {
             }
         }
         
+        //for(int i = 0; i < newConverter.length; i++)
+         //   System.out.print(newConverter[i] + " ");
         
         for(int i = converter.length-1; i > 0; i--) {
             newConverter[i] = newConverter[i] - newConverter[i-1];
