@@ -31,7 +31,7 @@ public class MultithreadedServer {
 }
 
 class HandleBmiClientTask implements Runnable {
-        private Socket socket;
+    private Socket socket;
     private int clientID;
     
     HandleBmiClientTask(Socket sock, int clientId) {
