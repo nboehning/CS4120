@@ -46,9 +46,7 @@ public class Exercise30_11 {
                 double newBalance = balance + amount;
                 
                 System.out.println("Depositing, waiting to withdraw");
-                Thread.sleep(50);
-                
-                acct.withdraw(100);
+                Thread.sleep(1000);
                 
                 balance = newBalance;
             }
@@ -67,9 +65,8 @@ public class Exercise30_11 {
                 double newBalance = balance - amount == 0 ? balance-amount : 0;
                 
                 System.out.println("Withdrawing, waiting to deposit");
-                Thread.sleep(100);
                 
-                acct.deposit(100);
+                Thread.sleep(1000);
                 
                 balance = newBalance;
             }
