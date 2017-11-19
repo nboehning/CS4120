@@ -71,10 +71,10 @@ public class Exercise37_5 extends HttpServlet {
             out.println("Loan Amount");
             out.println("<input type='number' name='loanAmt'><br>");            
             out.println("Annual Interest Rate");
-            out.println("<input type='number' name='rate'><br>");
+            out.println("<input type='number' step='0.01' name='rate'><br>");
             out.println("Number of Years");
             out.println("<input type='number' name='years'><br>");
-            out.println("<button type='submit' value='Submit'>Submit</button>");
+            out.println("<button type='submit' value='Submit'>Compute Loan Payment</button>");
             out.println("<button type='reset' value='Reset'>Reset</button>");
             out.println("</form>");
             out.println("</body>");
@@ -98,11 +98,35 @@ public class Exercise37_5 extends HttpServlet {
         double intRate = Double.parseDouble(request.getParameter("rate"));
         int years = Integer.parseInt(request.getParameter("years"));
         
-        
-        
+        try (PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet Exercise37_5</title>");            
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Compute Loan Payment</h1>");
+            out.println("<p>Starting loan amount: " + loanAmt + "</p>");
+            out.println("<p>Annual Interest Rate: " + intRate + "</p>");
+            out.println("<p>Number of years: " + years + "</p>");
+            out.println("<p>Monthly Loan Payment: " + getMonthlyPayment(intRate, loanAmt, years) + "</p>");
+            out.println("<p>Total Loan Payment: " + getTotalPayment(getMonthlyPayment(intRate, loanAmt, years), years) + "</p>");
+            out.println("</body>");
+            out.println("</html>");
+        }        
     }
-
     
+    double getMonthlyPayment(double rate, double amt, int yrs) {
+        double monthlyInterestRate = rate / 1200;
+        double monthlyPayment = amt * monthlyInterestRate / (1 -
+            (1 / Math.pow(1 + monthlyInterestRate, yrs * 12)));
+        return monthlyPayment;
+    }
+    
+    double getTotalPayment(double monthPay, int yrs) {
+        return monthPay * yrs * 12;
+    }
     
     /**
      * Returns a short description of the servlet.

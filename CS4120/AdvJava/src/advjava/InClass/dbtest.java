@@ -14,7 +14,7 @@ public class dbtest {
         Class.forName("com.mysql.jdbc.Driver");
         System.out.println("Driver loaded.");
         
-        Connection conn = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3307/javabook?user=scott&password=tiger");
+        Connection conn = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/javabook?user=scott&password=tiger");
         System.out.println("Database connected");
         
         Statement statement = conn.createStatement();
@@ -31,3 +31,4 @@ public class dbtest {
         conn.close();
     }
 }
+
