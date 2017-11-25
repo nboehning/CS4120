@@ -1,3 +1,5 @@
+package advjava.Competition;
+
 import java.util.Scanner;
 
 /**

@@ -1,4 +1,4 @@
-package advjava.competition;
+package advjava.Competition;
 
 import java.util.Scanner;
 
