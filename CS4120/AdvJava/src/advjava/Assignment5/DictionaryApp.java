@@ -45,7 +45,7 @@ public class DictionaryApp extends Application {
         root.getChildren().add(holder);
         
         searchButton.setOnAction(e -> {
-            if(wordField.getText() != "") {
+            if(!"".equals(wordField.getText())) {
                 try {
                     String def = makeQuery(wordField.getText());
                     wordText.setText("Word: " + wordField.getText());
